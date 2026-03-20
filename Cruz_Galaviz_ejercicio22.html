@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formula General</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h1 { color: #333; }
+    form { background: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 8px; max-width: 400px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input[type="text"] { width: 100%; padding: 8px; font-size: 15px; margin-top: 5px; box-sizing: border-box; }
+    button { padding: 10px 20px; margin-top: 15px; font-size: 15px; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 5px; }
+    button:hover { background: #357abd; }
+    #resultado { margin-top: 20px; font-size: 18px; font-weight: bold; color: #2c7a2c; }
+    .formula { font-size: 16px; margin: 15px 0; color: #555; background: #fff; padding: 10px; border: 1px solid #ccc; border-radius: 6px; max-width: 400px; }
+  </style>
+</head>
+<body>
+
+  <h1>Formula General</h1>
+
+  <div class="formula">
+    x = (-b ± √(b² - 4ac)) / 2a
+  </div>
+
+  <form onsubmit="return false;">
+    <label>a:</label>
+    <input type="text" id="a" placeholder="Valor de a" />
+
+    <label>b:</label>
+    <input type="text" id="b" placeholder="Valor de b" />
+
+    <label>c:</label>
+    <input type="text" id="c" placeholder="Valor de c" />
+
+    <br/>
+    <button onclick="calcular()">Calcular x1 y x2</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcular() {
+      var a = parseFloat(document.getElementById("a").value);
+      var b = parseFloat(document.getElementById("b").value);
+      var c = parseFloat(document.getElementById("c").value);
+      var res = document.getElementById("resultado");
+
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        res.innerHTML = "Ingresa valores en los tres campos.";
+        return;
+      }
+
+      if (a === 0) {
+        res.innerHTML = "El valor de 'a' no puede ser 0.";
+        return;
+      }
+
+      var discriminante = (b * b) - (4 * a * c);
+
+      if (discriminante < 0) {
+        res.innerHTML = "No tiene solución real (discriminante negativo).";
+        return;
+      }
+
+      var x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+      var x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+
+      res.innerHTML =
+        "Discriminante: " + discriminante + "<br>" +
+        "x1 = " + x1 + "<br>" +
+        "x2 = " + x2;
+    }
+  </script>
+
+</body>
+</html>
