@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Operaciones con Variables</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h1 { color: #333; }
+    input { padding: 8px; font-size: 16px; width: 100px; margin: 5px; }
+    button { padding: 10px 18px; margin: 6px; font-size: 15px; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 5px; }
+    button:hover { background: #357abd; }
+    #resultado { margin-top: 20px; font-size: 20px; font-weight: bold; color: #2c7a2c; }
+  </style>
+</head>
+<body>
+
+  <h1>Operaciones Aritméticas</h1>
+
+  <p>Ingresa dos valores:</p>
+  <input type="number" id="a" placeholder="Variable a" />
+  <input type="number" id="b" placeholder="Variable b" />
+
+  <br/>
+
+  <button onclick="operar('+')">Suma</button>
+  <button onclick="operar('-')">Resta</button>
+  <button onclick="operar('/')">División</button>
+  <button onclick="operar('**')">Exponenciación</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function operar(tipo) {
+      var a = parseFloat(document.getElementById("a").value);
+      var b = parseFloat(document.getElementById("b").value);
+
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById("resultado").innerHTML = "Ingresa valores en ambos campos.";
+        return;
+      }
+
+      var resultado;
+      var simbolo;
+
+      if (tipo === '+')  { resultado = a + b;  simbolo = "+"; }
+      if (tipo === '-')  { resultado = a - b;  simbolo = "-"; }
+      if (tipo === '/')  { 
+        if (b === 0) {
+          document.getElementById("resultado").innerHTML = "No se puede dividir entre 0.";
+          return;
+        }
+        resultado = a / b; 
+        simbolo = "/"; 
+      }
+      if (tipo === '**') { resultado = a ** b; simbolo = "**"; }
+
+      document.getElementById("resultado").innerHTML =
+        a + " " + simbolo + " " + b + " = " + resultado;
+    }
+  </script>
+
+</body>
+</html>
