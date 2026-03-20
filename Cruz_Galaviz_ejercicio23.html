@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>IMC - Indice de Masa Corporal</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h1 { color: #333; }
+    form { background: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 8px; max-width: 400px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input[type="text"] { width: 100%; padding: 8px; font-size: 15px; margin-top: 5px; box-sizing: border-box; }
+    button { padding: 10px 20px; margin-top: 15px; font-size: 15px; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 5px; }
+    button:hover { background: #357abd; }
+    #resultado { margin-top: 20px; font-size: 16px; background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 15px; max-width: 400px; display: none; }
+    #resultado h2 { margin: 0 0 10px 0; color: #333; }
+    #imc-valor { font-size: 36px; font-weight: bold; }
+    #imc-grado { font-size: 18px; font-weight: bold; margin-top: 8px; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; }
+    th { background: #4a90d9; color: white; }
+    .activa { font-weight: bold; background: #d4edda; }
+  </style>
+</head>
+<body>
+
+  <h1>Calculadora de IMC</h1>
+  <p>Indice de Masa Corporal para mujer</p>
+
+  <form onsubmit="return false;">
+    <label>Peso (kg):</label>
+    <input type="text" id="peso" placeholder="Ej. 60" />
+
+    <label>Estatura (m):</label>
+    <input type="text" id="estatura" placeholder="Ej. 1.65" />
+
+    <button onclick="calcularIMC()">Calcular IMC</button>
+  </form>
+
+  <div id="resultado">
+    <h2>Resultado</h2>
+    <div>Tu IMC es: <span id="imc-valor"></span></div>
+    <div id="imc-grado"></div>
+
+    <table>
+      <tr>
+        <th>IMC</th>
+        <th>Grado</th>
+      </tr>
+      <tr id="row1"><td>Menos de 18.5</td><td>Bajo peso</td></tr>
+      <tr id="row2"><td>18.5 - 24.9</td><td>Peso normal</td></tr>
+      <tr id="row3"><td>25.0 - 29.9</td><td>Sobrepeso</td></tr>
+      <tr id="row4"><td>30.0 - 34.9</td><td>Obesidad grado I</td></tr>
+      <tr id="row5"><td>35.0 - 39.9</td><td>Obesidad grado II</td></tr>
+      <tr id="row6"><td>40.0 o mas</td><td>Obesidad grado III</td></tr>
+    </table>
+  </div>
+
+  <script>
+    function calcularIMC() {
+      var peso     = parseFloat(document.getElementById("peso").value);
+      var estatura = parseFloat(document.getElementById("estatura").value);
+      var res      = document.getElementById("resultado");
+
+      if (isNaN(peso) || isNaN(estatura)) {
+        alert("Ingresa valores en ambos campos.");
+        return;
+      }
+
+      if (peso <= 0 || estatura <= 0) {
+        alert("Los valores deben ser mayores a 0.");
+        return;
+      }
+
+      var imc   = peso / (estatura * estatura);
+      var imcRe = imc.toFixed(2);
+
+      var grado;
+      var fila;
+
+      if (imc < 18.5) {
+        grado = "Bajo peso";
+        fila  = "row1";
+      } else if (imc < 25) {
+        grado = "Peso normal";
+        fila  = "row2";
+      } else if (imc < 30) {
+        grado = "Sobrepeso";
+        fila  = "row3";
+      } else if (imc < 35) {
+        grado = "Obesidad grado I";
+        fila  = "row4";
+      } else if (imc < 40) {
+        grado = "Obesidad grado II";
+        fila  = "row5";
+      } else {
+        grado = "Obesidad grado III";
+        fila  = "row6";
+      }
+
+      var filas = ["row1","row2","row3","row4","row5","row6"];
+      for (var i = 0; i < filas.length; i++) {
+        document.getElementById(filas[i]).className = "";
+      }
+      document.getElementById(fila).className = "activa";
+
+      document.getElementById("imc-valor").innerHTML = imcRe;
+      document.getElementById("imc-grado").innerHTML = "Grado: " + grado;
+      res.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
