@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Salidas en JavaScript</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h1 { color: #333; }
+    h2 { color: #555; margin-top: 30px; }
+    #miElemento { background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 6px; }
+    button { margin: 5px; padding: 8px 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h1>Salidas de Texto en JavaScript</h1>
+  <p>Datos personales: <strong>Cruz Galaviz Luis Angel</strong></p>
+
+  <h2>1. innerHTML</h2>
+  <div id="miElemento">Haz clic para mostrar datos aquí.</div>
+  <button onclick="mostrarHTML()">Mostrar con innerHTML</button>
+
+  <h2>2. document.write()</h2>
+  <button onclick="mostrarWrite()">Mostrar con document.write()</button>
+
+  <h2>3. window.alert()</h2>
+  <button onclick="mostrarAlert()">Mostrar con alert()</button>
+
+  <h2>4. console.log()</h2>
+  <p>Abre la consola del navegador (F12) y haz clic:</p>
+  <button onclick="mostrarConsole()">Mostrar con console.log()</button>
+
+  <script>
+
+    function mostrarHTML() {
+      document.getElementById("miElemento").innerHTML =
+        "<b>Nombre:</b> Cruz Galaviz Luis Angel <br>" +
+        "<b>Carrera:</b> Ingeniería de Software <br>" +
+        "<b>Grupo:</b> 301 <br>" +
+        "<b>Ciudad:</b> Los Mochis, Sinaloa";
+    }
+
+    function mostrarWrite() {
+      document.write("Nombre: Cruz Galaviz Luis Angel <br>");
+      document.write("Carrera: Ingeniería de Software <br>");
+      document.write("Grupo: 301 <br>");
+      document.write("Ciudad: Los Mochis, Sinaloa");
+    }
+
+    function mostrarAlert() {
+      window.alert(
+        "Nombre: Cruz Galaviz Luis Angel\n" +
+        "Carrera: Ingeniería de Software\n" +
+        "Grupo: 301\n" +
+        "Ciudad: Los Mochis, Sinaloa"
+      );
+    }
+
+    function mostrarConsole() {
+      console.log("Nombre: Cruz Galaviz Luis Angel");
+      console.log("Carrera: Ingeniería de Software");
+      console.log("Grupo: 301");
+      console.log("Ciudad: Los Mochis, Sinaloa");
+    }
+  </script>
+
+</body>
+</html>
