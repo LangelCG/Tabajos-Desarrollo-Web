@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Operaciones con Formulario</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f5f5; }
+    h1 { color: #333; }
+    form { background: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 8px; max-width: 400px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input[type="text"] { width: 100%; padding: 8px; font-size: 15px; margin-top: 5px; box-sizing: border-box; }
+    button { padding: 10px 16px; margin: 8px 5px 0 0; font-size: 14px; cursor: pointer; background: #4a90d9; color: white; border: none; border-radius: 5px; }
+    button:hover { background: #357abd; }
+    #resultado { margin-top: 20px; font-size: 20px; font-weight: bold; color: #2c7a2c; }
+  </style>
+</head>
+<body>
+
+  <h1>Operaciones Aritméticas con Formulario</h1>
+
+  <form onsubmit="return false;">
+    <label>Variable a:</label>
+    <input type="text" id="a" placeholder="Ingresa un número" />
+
+    <label>Variable b:</label>
+    <input type="text" id="b" placeholder="Ingresa un número" />
+
+    <br/><br/>
+    <button onclick="operar('+')">Suma</button>
+    <button onclick="operar('-')">Resta</button>
+    <button onclick="operar('/')">División</button>
+    <button onclick="operar('**')">Exponenciación</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function operar(tipo) {
+      var a = parseFloat(document.getElementById("a").value);
+      var b = parseFloat(document.getElementById("b").value);
+      var res = document.getElementById("resultado");
+
+      if (isNaN(a) || isNaN(b)) {
+        res.innerHTML = "Ingresa valores en ambos campos.";
+        return;
+      }
+
+      if (tipo === '/' && b === 0) {
+        res.innerHTML = "No se puede dividir entre 0.";
+        return;
+      }
+
+      var resultado;
+      var simbolo;
+
+      if (tipo === '+')  { resultado = a + b;  simbolo = "+"; }
+      if (tipo === '-')  { resultado = a - b;  simbolo = "-"; }
+      if (tipo === '/')  { resultado = a / b;  simbolo = "/"; }
+      if (tipo === '**') { resultado = a ** b; simbolo = "**"; }
+
+      res.innerHTML = a + " " + simbolo + " " + b + " = " + resultado;
+    }
+  </script>
+
+</body>
+</html>
